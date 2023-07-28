@@ -1,0 +1,26 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* 12 equal-width columns */
+  grid-template-rows: repeat(9, 1fr); /* 9 equal-height rows */
+  gap: 10px;
+  max-width: 1190px;
+  margin: 20px;
+}
+
+.card {
+  width: 90px;
+  height: 90px;
+  background-color: lightblue;
+  border-radius: 6px;
+}
+
+.removed-card {
+  display: hidden;
+}

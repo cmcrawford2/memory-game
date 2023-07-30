@@ -19,3 +19,5 @@ Save to local storage.
 Save to firebase.
 
 Spiff up css to make cards more realistic.
+
+Add propTypes

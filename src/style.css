@@ -12,13 +12,20 @@ main {
   gap: 10px;
   max-width: 1190px;
   margin: 20px;
+  background-color: pink; /* For debugging */
 }
 
 .card {
   width: 90px;
   height: 90px;
+  min-width: 90px; /* To maintain sizing when zoomed in */
   background-color: lightblue;
   border-radius: 6px;
+  /* box-shadow: 3px 3px 3px gray; */
+}
+
+.card img {
+  margin: 5px;
 }
 
 .removed-card {

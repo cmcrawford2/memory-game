@@ -24,6 +24,10 @@ main {
   margin: 0;
 }
 
+.start-over {
+  margin-left: 20px;
+}
+
 .card-container {
   display: grid;
   /* grid-template-columns: repeat(12, 1fr); 12 equal-width columns */

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Nav from "./Nav.jsx";
 import Card from "./Card.jsx";
 import Modal from "./Modal.jsx";
+import Confetti from "react-confetti";
+import getRandomizedImages from "./utils.js";
+
 import "./style.css";
 
 export default function App() {
@@ -16,22 +19,23 @@ export default function App() {
     const cardsArray = [];
     const nCards = nRows * nColumns;
 
-    for (let i = 1; i <= nCards / 2; i++) {
-      const cardImage = `/card${i}.jpg`;
+    const imageArray = getRandomizedImages();
+
+    for (let i = 0; i < nCards / 2; i++) {
       cardsArray.push({
         value: i,
-        imageUrl: cardImage,
+        imageUrl: imageArray[i],
         isVisible: true,
         isFlipped: false,
-        id: 2 * i - 2,
+        id: 2 * i,
       });
       // Duplicate each card's value to create pairs
       cardsArray.push({
         value: i,
-        imageUrl: cardImage,
+        imageUrl: imageArray[i],
         isVisible: true,
         isFlipped: false,
-        id: 2 * i - 1,
+        id: 2 * i + 1,
       });
     }
     // Permute the array.
@@ -56,7 +60,6 @@ export default function App() {
     if (gameOver) {
       console.log("in gameOver");
       openModal();
-      setGameOver(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
@@ -127,6 +130,7 @@ export default function App() {
   function closeModal() {
     const modal = document.querySelector('[data-id="modal"]');
     modal.classList.add("hidden");
+    setGameOver(false);
   }
 
   function restartGame() {
@@ -141,6 +145,10 @@ export default function App() {
         numColumns={nColumns}
         onSetNumRows={setNumRows}
         onSetNumColumns={setNumColumns}
+        startOver={() => {
+          setCards(createLayout());
+          setFlippedCardIds([]);
+        }}
       />
       <div
         className="card-container"
@@ -152,6 +160,7 @@ export default function App() {
       >
         {cardDivs}
       </div>
+      {gameOver && <Confetti />}
       <Modal restart={restartGame} />
     </main>
   );

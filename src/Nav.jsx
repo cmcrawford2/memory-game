@@ -45,6 +45,9 @@ export default function Nav(props) {
           <option value={9}>9 Rows</option>
         </select>
       </div>
+      <button className="start-over" onClick={props.startOver}>
+        start over
+      </button>
     </div>
   );
 }
@@ -54,4 +57,5 @@ Nav.propTypes = {
   numRows: PropTypes.number.isRequired,
   onSetNumRows: PropTypes.func.isRequired,
   onSetNumColumns: PropTypes.func.isRequired,
+  startOver: PropTypes.func.isRequired,
 };

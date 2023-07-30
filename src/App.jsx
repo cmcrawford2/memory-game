@@ -1,19 +1,20 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Nav from "./Nav.jsx";
 import Card from "./Card.jsx";
 import "./style.css";
 
-const nCards = 4;
-
 export default function App() {
-  const [cards, setCards] = React.useState(createLayout());
-  const [flippedCardIds, setFlippedCardIds] = React.useState([]);
+  const [nRows, setNRows] = useState(9);
+  const [nColumns, setNColumns] = useState(12);
+  const [cards, setCards] = useState(createLayout());
+  const [flippedCardIds, setFlippedCardIds] = useState([]);
 
   function createLayout() {
     // Create an array to hold the card values
     const cardsArray = [];
+    const nCards = nRows * nColumns;
 
-    for (let i = 1; i <= nCards; i++) {
+    for (let i = 1; i <= nCards / 2; i++) {
       const cardImage = `/card${i}.jpg`;
       cardsArray.push({
         value: i,
@@ -32,14 +33,23 @@ export default function App() {
       });
     }
     // Permute the array.
-    for (let i = 2 * nCards - 1; i > 0; i--) {
+    for (let i = nCards - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * i);
       const tempCard = cardsArray[i];
       cardsArray[i] = cardsArray[j];
       cardsArray[j] = tempCard;
     }
+    console.log("cardsArray:", cardsArray.length);
     return cardsArray;
   }
+
+  useEffect(() => {
+    console.log("in useEffect", nRows, nColumns);
+    // Start over when user chooses new configuration.
+    setCards(createLayout());
+    setFlippedCardIds([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nRows, nColumns]);
 
   function flipCard(id) {
     if (flippedCardIds.length === 2) {
@@ -88,11 +98,27 @@ export default function App() {
     );
   });
 
+  function setNumColumns(numColumns) {
+    setNColumns(numColumns);
+  }
+
+  function setNumRows(numRows) {
+    setNRows(numRows);
+  }
+
   return (
     <main>
-      <Nav />
-
-      <div className="card-container">{cardDivs}</div>
+      <Nav onSetNumColumns={setNumColumns} onSetNumRows={setNumRows} />
+      <div
+        className="card-container"
+        style={{
+          gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
+          gridTemplateRows: `repeat(${nRows}, 1fr)`,
+          maxWidth: `${nColumns * 100}px`,
+        }}
+      >
+        {cardDivs}
+      </div>
     </main>
   );
 }

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Card(props) {
   return (
     <div
@@ -8,3 +10,11 @@ export default function Card(props) {
     </div>
   );
 }
+
+Card.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  isFlipped: PropTypes.bool.isRequired,
+  flipCard: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+};

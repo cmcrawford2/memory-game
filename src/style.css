@@ -7,8 +7,8 @@ main {
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr); /* 12 equal-width columns */
-  grid-template-rows: repeat(9, 1fr); /* 9 equal-height rows */
+  /* grid-template-columns: repeat(12, 1fr); 12 equal-width columns */
+  /* grid-template-rows: repeat(9, 1fr); 9 equal-height rows */
   gap: 10px;
   max-width: 1190px;
   margin: 20px;
@@ -21,7 +21,7 @@ main {
   min-width: 90px; /* To maintain sizing when zoomed in */
   background-color: lightblue;
   border-radius: 6px;
-  /* box-shadow: 3px 3px 3px gray; */
+  box-shadow: 3px 3px 3px gray;
 }
 
 .card img {

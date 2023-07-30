@@ -5,14 +5,32 @@ main {
   flex-direction: column;
 }
 
+.input {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.memory {
+  background: lightblue;
+  border: 5px solid red;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.memory h2 {
+  margin: 0;
+}
+
 .card-container {
   display: grid;
   /* grid-template-columns: repeat(12, 1fr); 12 equal-width columns */
   /* grid-template-rows: repeat(9, 1fr); 9 equal-height rows */
   gap: 10px;
   max-width: 1190px;
-  margin: 20px;
-  background-color: pink; /* For debugging */
+  margin-left: 20px;
 }
 
 .card {
@@ -30,4 +48,43 @@ main {
 
 .removed-card {
   display: hidden;
+}
+
+/* Modal styles - opens when game finishes  */
+
+.hidden {
+  display: none !important;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: fixed; */
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.6); */
+}
+
+.modal-contents {
+  transform: translateY(-80px);
+  height: 150px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #2a4544;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  margin: 10px;
+}
+
+.modal-contents button {
+  padding: 10px;
+  background-color: lightblue;
+  color: #2a4544;
+  border-radius: 3px;
 }

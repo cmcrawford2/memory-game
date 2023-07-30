@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Nav from "./Nav.jsx";
 import Card from "./Card.jsx";
+import Modal from "./Modal.jsx";
 import "./style.css";
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
   const [nColumns, setNColumns] = useState(12);
   const [cards, setCards] = useState(createLayout());
   const [flippedCardIds, setFlippedCardIds] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
   function createLayout() {
     // Create an array to hold the card values
@@ -39,17 +41,25 @@ export default function App() {
       cardsArray[i] = cardsArray[j];
       cardsArray[j] = tempCard;
     }
-    console.log("cardsArray:", cardsArray.length);
     return cardsArray;
   }
 
   useEffect(() => {
-    console.log("in useEffect", nRows, nColumns);
+    console.log("in reset game");
     // Start over when user chooses new configuration.
     setCards(createLayout());
     setFlippedCardIds([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nRows, nColumns]);
+
+  useEffect(() => {
+    if (gameOver) {
+      console.log("in gameOver");
+      openModal();
+      setGameOver(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameOver]);
 
   function flipCard(id) {
     if (flippedCardIds.length === 2) {
@@ -67,6 +77,8 @@ export default function App() {
       });
       setCards(newArr);
       setFlippedCardIds([]);
+      // Check for game over
+      if (!cards.find((card) => card.isVisible)) setGameOver(true);
       return;
     }
     // Don't let the user flip a removed card.
@@ -106,9 +118,30 @@ export default function App() {
     setNRows(numRows);
   }
 
+  function openModal() {
+    const modal = document.querySelector('[data-id="modal"]');
+    console.log(modal);
+    modal.classList.remove("hidden");
+  }
+
+  function closeModal() {
+    const modal = document.querySelector('[data-id="modal"]');
+    modal.classList.add("hidden");
+  }
+
+  function restartGame() {
+    closeModal();
+    setCards(createLayout());
+  }
+
   return (
     <main>
-      <Nav onSetNumColumns={setNumColumns} onSetNumRows={setNumRows} />
+      <Nav
+        numRows={nRows}
+        numColumns={nColumns}
+        onSetNumRows={setNumRows}
+        onSetNumColumns={setNumColumns}
+      />
       <div
         className="card-container"
         style={{
@@ -119,6 +152,7 @@ export default function App() {
       >
         {cardDivs}
       </div>
+      <Modal restart={restartGame} />
     </main>
   );
 }

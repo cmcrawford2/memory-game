@@ -13,7 +13,7 @@ export default function Nav(props) {
   return (
     <div className="input">
       <div className="memory">
-        <h2>memory</h2>
+        <h1>memory</h1>
       </div>
       <div>
         <label htmlFor="numColumns">Layout:&nbsp;</label>
@@ -46,7 +46,7 @@ export default function Nav(props) {
         </select>
       </div>
       <button className="start-over" onClick={props.startOver}>
-        start over
+        <h2>start over</h2>
       </button>
     </div>
   );

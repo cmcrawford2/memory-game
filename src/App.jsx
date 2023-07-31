@@ -10,7 +10,7 @@ import "./style.css";
 export default function App() {
   const [nRows, setNRows] = useState(9);
   const [nColumns, setNColumns] = useState(12);
-  const [cards, setCards] = useState(createLayout());
+  const [cards, setCards] = useState([]);
   const [flippedCardIds, setFlippedCardIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
@@ -49,8 +49,8 @@ export default function App() {
   }
 
   useEffect(() => {
-    console.log("in reset game");
     // Start over when user chooses new configuration.
+    // This will run once to initialize.
     setCards(createLayout());
     setFlippedCardIds([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,8 +58,8 @@ export default function App() {
 
   useEffect(() => {
     if (gameOver) {
-      console.log("in gameOver");
-      openModal();
+      const modal = document.querySelector('[data-id="modal"]');
+      modal.classList.remove("hidden");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
@@ -114,28 +114,21 @@ export default function App() {
   });
 
   function setNumColumns(numColumns) {
+    if (gameOver) restartGame();
     setNColumns(numColumns);
   }
 
   function setNumRows(numRows) {
+    if (gameOver) restartGame();
     setNRows(numRows);
   }
 
-  function openModal() {
-    const modal = document.querySelector('[data-id="modal"]');
-    console.log(modal);
-    modal.classList.remove("hidden");
-  }
-
-  function closeModal() {
+  function restartGame() {
+    // Restarting after a win. No cards are flipped or visible.
     const modal = document.querySelector('[data-id="modal"]');
     modal.classList.add("hidden");
-    setGameOver(false);
-  }
-
-  function restartGame() {
-    closeModal();
     setCards(createLayout());
+    setGameOver(false);
   }
 
   return (
@@ -146,8 +139,10 @@ export default function App() {
         onSetNumRows={setNumRows}
         onSetNumColumns={setNumColumns}
         startOver={() => {
-          setCards(createLayout());
-          setFlippedCardIds([]);
+          if (!gameOver) {
+            setCards(createLayout());
+            setFlippedCardIds([]);
+          }
         }}
       />
       <div

@@ -4,8 +4,10 @@ export default function Modal(props) {
   return (
     <div className="modal hidden" data-id="modal">
       <div className="modal-contents">
-        <h2>game over!</h2>
-        <button onClick={props.restart}>Play again</button>
+        <h1>game over!</h1>
+        <button onClick={props.restart}>
+          <h3>play again</h3>
+        </button>
       </div>
     </div>
   );

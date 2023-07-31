@@ -8,6 +8,6 @@ export default function getRandomizedImages() {
     [indexArray[i], indexArray[j]] = [indexArray[j], indexArray[i]];
   }
   // Cards are card1.jpg, card2.jpg, etc.
-  const imageArray = indexArray.map((index) => `/card${index}.jpg`);
+  const imageArray = indexArray.map((index) => `/card${index}.jpeg`);
   return imageArray;
 }

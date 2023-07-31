@@ -5,6 +5,13 @@ export default function Card(props) {
     <div
       className={props.isVisible ? "card" : "removedCard"}
       onClick={props.flipCard}
+      style={{
+        backgroundColor: props.isVisible
+          ? props.isFlipped
+            ? "beige"
+            : "lightblue"
+          : "white",
+      }}
     >
       {props.isFlipped && <img src={props.imageUrl} alt={props.value} />}
     </div>

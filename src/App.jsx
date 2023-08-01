@@ -139,7 +139,8 @@ export default function App() {
         onSetNumRows={setNumRows}
         onSetNumColumns={setNumColumns}
         startOver={() => {
-          if (!gameOver) {
+          if (gameOver) restartGame();
+          else {
             setCards(createLayout());
             setFlippedCardIds([]);
           }

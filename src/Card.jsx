@@ -8,7 +8,7 @@ export default function Card(props) {
       style={{
         backgroundColor: props.isVisible
           ? props.isFlipped
-            ? "beige"
+            ? "#e0e0c0"
             : "lightblue"
           : "white",
       }}

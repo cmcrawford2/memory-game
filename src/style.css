@@ -51,7 +51,7 @@ h3 {
   width: 90px;
   height: 90px;
   min-width: 90px; /* To maintain sizing when zoomed in */
-  background-color: lightblue;
+  /* background-color: lightblue; */
   border-radius: 6px;
   box-shadow: 3px 3px 3px gray;
 }

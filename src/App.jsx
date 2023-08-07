@@ -7,14 +7,20 @@ import getRandomizedImages from "./utils.js";
 
 import "./style.css";
 
+// This is a memory card game where you match pictures of cards.
+// You can play by yourself, or against the computer.
+// TODO: add computer as a player.
+
 export default function App() {
   const [nRows, setNRows] = useState(9);
   const [nColumns, setNColumns] = useState(12);
-  const [cards, setCards] = useState([]);
+  const [nTries, setNTries] = useState(0);
+  const [cards, setCards] = useState([]); // useEffect will initialize.
   const [flippedCardIds, setFlippedCardIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
   function createLayout() {
+    setNTries(0);
     // Create an array to hold the card values
     const cardsArray = [];
     const nCards = nRows * nColumns;
@@ -66,6 +72,7 @@ export default function App() {
 
   function flipCard(id) {
     if (flippedCardIds.length === 2) {
+      setNTries((nTries) => nTries + 1);
       // user can't flip any more cards. check for match, turn cards over or remove.
       const card1 = cards.find((card) => card.id === flippedCardIds[0]);
       const card2 = cards.find((card) => card.id === flippedCardIds[1]);
@@ -157,7 +164,7 @@ export default function App() {
         {cardDivs}
       </div>
       {gameOver && <Confetti />}
-      <Modal restart={restartGame} />
+      <Modal nTries={nTries} restart={restartGame} />
     </main>
   );
 }

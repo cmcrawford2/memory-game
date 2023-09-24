@@ -1,13 +1,13 @@
 # Memory Game
 
-Still to do:
+This is a simple, classic memory game based on the card game from the 1960s.
 
-Add user vs. computer mode.
+You can choose number of columns (even numbers only up to 12) and number of rows (1-9).
 
-Add slider for computer memory handicap.
+Click on two cards, and then click a third time. If the cards match, they disappear. If they don't match, they turn over, but now you know what they are.
 
-Save to local storage.
+When the game is over, a "game over" screen appears with the number of tries on it. And you get a shower of confetti.
 
-Save to firebase.
+It's open source. The game needs modifications, which can be found [here](https://github.com/cmcrawford2/memory-game/contributions.md" in contributions.md.
 
-Spiff up css to make cards more realistic.
+A code of conduct can be found [here](https://github.com/cmcrawford2/memory-game/codeofconduct.md).

@@ -6,8 +6,8 @@ Welcome to the Memory Game contributors guide.
 
 Before you begin:
 
-- Read the [Code of Conduct](https://github.com/cmcrawford2/memory-game/code-of-conduct.md/)
-- Check out [existing issues](https://github.com/cmcrawford2/memory-game/issues) and the [discussion board](https://github.com/cmcrawford2/memory-game/discussions) to ensure your issue hasn’t been brought up before.
+- Read the [Code of Conduct](https://github.com/cmcrawford2/memory-game/COC.md/)
+- Check out [existing issues](https://github.com/cmcrawford2/memory-game/issues)
 
 If you're looking to start learning how to work with this repo, this document tries to provide all the resources to get you from confusion to productivity.
 
@@ -24,12 +24,6 @@ This is an open source project, and we love to receive contributions from our co
 We're going to assume you know what [GitHub](https://www.howtogeek.com/180167/htg-explains-what-is-github-and-what-do-geeks-use-it-for/) is (otherwise, how would you be reading this?).
 
 If you haven't made a GitHub account as yet, [make one now](https://github.com). It's free!
-
-### Discussions
-
-For questions, comments, or other discussion topics that don’t have a clear action, please use the [discussion board](https://github.com/Virtual-Coffee/virtualcoffee.io/discussions).
-
-For example, if you want to ask “Should we do…” or “How do I do…”, you’ll start in the discussion board. This allows a whole-group conversation, and we can integrate the answer into documentation or issues as necessary.
 
 ### Working With Issues
 

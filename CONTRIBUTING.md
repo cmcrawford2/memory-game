@@ -6,7 +6,7 @@ Welcome to the Memory Game contributors guide.
 
 Before you begin:
 
-- Read the [Code of Conduct](https://github.com/cmcrawford2/memory-game/COC.md/)
+- Read the [Code of Conduct](https://github.com/cmcrawford2/memory-game/blob/main/COC.md/)
 - Check out [existing issues](https://github.com/cmcrawford2/memory-game/issues)
 
 If you're looking to start learning how to work with this repo, this document tries to provide all the resources to get you from confusion to productivity.

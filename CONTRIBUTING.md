@@ -59,7 +59,6 @@ Please make sure you **create a new branch and work in this branch** to avoid pu
 - On your forked repository, select "Create pull request"
 - Fill in the comments on the form.
 - Click the "Create pull request" button.
-- Merge and close the pull request.
 
 ### Awaiting Review
 
@@ -72,3 +71,5 @@ If the pull request looks good, a maintainer will typically give feedback and me
 We may ask for changes to be made before a pull request can be merged, either using [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or pull request comments. You can apply suggested changes directly through the UI. You can make any other changes in your fork, then commit them to your branch.
 
 As you update your pull request and apply changes, mark each conversation as [resolved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
+
+This is a curtailed version of the Virtual Coffee CONTRIBUTING.md. You can find the original [here](https://github.com/Virtual-Coffee/virtualcoffee.io/blob/main/CONTRIBUTING.md)

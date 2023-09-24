@@ -8,4 +8,4 @@ Click on two cards, and then click a third time. If the cards match, they disapp
 
 When the game is over, a "game over" screen appears with the number of tries on it. And you get a shower of confetti.
 
-It's open source. The game needs modifications, which can be found [here](https://github.com/cmcrawford2/memory-game/contributions.md) in contributions.md.
+It's open source. The game needs modifications, which can be found [here](https://github.com/cmcrawford2/memory-game/CONTRIBUTING.md) in CONTRIBUTING.md.

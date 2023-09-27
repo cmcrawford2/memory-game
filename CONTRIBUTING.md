@@ -52,7 +52,7 @@ Please make sure you **create a new branch and work in this branch** to avoid pu
 - Make changes to the files that you want to change, and save them.
 - type "git add -A"
 - type "git commit -m "Some comment about what you did"
-- type "git push -u origin main"
+- type "git push -u origin branchname"
 
 ### Create a pull request
 

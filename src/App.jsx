@@ -19,6 +19,17 @@ export default function App() {
   const [flippedCardIds, setFlippedCardIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
+  // Function to save the values in local storage
+  function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  // Function to load the values from local storage
+  function loadFromLocalStorage(key, defaultValue) {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : defaultValue;
+  }
+
   function createLayout() {
     setNTries(0);
     // Create an array to hold the card values
@@ -57,6 +68,10 @@ export default function App() {
   useEffect(() => {
     // Start over when user chooses new configuration.
     // This will run once to initialize.
+    const savedNRows = loadFromLocalStorage("nRows", 9);
+    const savedNColumns = loadFromLocalStorage("nColumns", 12);
+    setNRows(savedNRows);
+    setNColumns(savedNColumns);
     setCards(createLayout());
     setFlippedCardIds([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,11 +138,13 @@ export default function App() {
   function setNumColumns(numColumns) {
     if (gameOver) restartGame();
     setNColumns(numColumns);
+    saveToLocalStorage("nColumns", numColumns);
   }
 
   function setNumRows(numRows) {
     if (gameOver) restartGame();
     setNRows(numRows);
+    saveToLocalStorage("nRows", numRows);
   }
 
   function restartGame() {

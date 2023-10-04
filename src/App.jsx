@@ -104,13 +104,109 @@ export default function App() {
       setFlippedCardIds([]);
       // Check for game over
       if (!cards.find((card) => card.isVisible)) setGameOver(true);
+import React, { useState, useEffect } from "react";
+import Nav from "./Nav.jsx";
+import Card from "./Card.jsx";
+import Modal from "./Modal.jsx";
+import Confetti from "react-confetti";
+import getRandomizedImages from "./utils.js";
+import "./style.css";
+
+export default function App() {
+  // State variables for game settings and cards
+  const [nRows, setNRows] = useState(9);
+  const [nColumns, setNColumns] = useState(12);
+  const [nTries, setNTries] = useState(0);
+  const [cards, setCards] = useState([]);
+  const [flippedCardIds, setFlippedCardIds] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+
+  // Function to save values to local storage
+  function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  // Function to load values from local storage
+  function loadFromLocalStorage(key, defaultValue) {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : defaultValue;
+  }
+
+  // Function to create the initial layout of cards
+  function createLayout() {
+    setNTries(0);
+    const cardsArray = [];
+    const nCards = nRows * nColumns;
+    const imageArray = getRandomizedImages();
+
+    for (let i = 0; i < nCards / 2; i++) {
+      cardsArray.push({
+        value: i,
+        imageUrl: imageArray[i],
+        isVisible: true,
+        isFlipped: false,
+        id: 2 * i,
+      });
+
+      cardsArray.push({
+        value: i,
+        imageUrl: imageArray[i],
+        isVisible: true,
+        isFlipped: false,
+        id: 2 * i + 1,
+      });
+    }
+
+    for (let i = nCards - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const tempCard = cardsArray[i];
+      cardsArray[i] = cardsArray[j];
+      cardsArray[j] = tempCard;
+    }
+
+    return cardsArray;
+  }
+
+  // useEffect to load settings and initialize the game
+  useEffect(() => {
+    const savedNRows = loadFromLocalStorage("nRows", 9);
+    const savedNColumns = loadFromLocalStorage("nColumns", 12);
+    setNRows(savedNRows);
+    setNColumns(savedNColumns);
+    setCards(createLayout());
+    setFlippedCardIds([]);
+  }, [nRows, nColumns]);
+
+  // useEffect to handle the game over state and display modal
+  useEffect(() => {
+    if (gameOver) {
+      const modal = document.querySelector('[data-id="modal"]');
+      modal.classList.remove("hidden");
+    }
+  }, [gameOver]);
+
+  // Function to handle flipping a card
+  function flipCard(id) {
+    if (flippedCardIds.length === 2) {
+      setNTries((nTries) => nTries + 1);
+      const card1 = cards.find((card) => card.id === flippedCardIds[0]);
+      const card2 = cards.find((card) => card.id === flippedCardIds[1]);
+      const newArr = cards.map((card) => {
+        if (card.id === flippedCardIds[0] || card.id === flippedCardIds[1]) {
+          card.isFlipped = false;
+          if (card1.value === card2.value) card.isVisible = false;
+        }
+        return card;
+      });
+      setCards(newArr);
+      setFlippedCardIds([]);
+      if (!cards.find((card) => card.isVisible)) setGameOver(true);
       return;
     }
-    // Don't let the user flip a removed card.
+
     const card = cards.find((card) => card.id === id);
     if (card.isVisible === false) return;
 
-    // Don't let the user turn the first card back over.
     if (flippedCardIds.length === 1 && flippedCardIds[0] === id) return;
 
     const newArr = cards.map((card) => {
@@ -121,8 +217,8 @@ export default function App() {
     setFlippedCardIds((oldArray) => [...oldArray, id]);
   }
 
+  // Render card components
   const cardDivs = cards.map((card) => {
-    // flipCard is the onClick callback function for each card.
     return (
       <Card
         isVisible={card.isVisible}
@@ -135,20 +231,22 @@ export default function App() {
     );
   });
 
+  // Function to set the number of columns
   function setNumColumns(numColumns) {
     if (gameOver) restartGame();
     setNColumns(numColumns);
     saveToLocalStorage("nColumns", numColumns);
   }
 
+  // Function to set the number of rows
   function setNumRows(numRows) {
     if (gameOver) restartGame();
     setNRows(numRows);
     saveToLocalStorage("nRows", numRows);
   }
 
+  // Function to restart the game
   function restartGame() {
-    // Restarting after a win. No cards are flipped or visible.
     const modal = document.querySelector('[data-id="modal"]');
     modal.classList.add("hidden");
     setCards(createLayout());

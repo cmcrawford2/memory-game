@@ -18,6 +18,9 @@ export default function App() {
   const [cards, setCards] = useState([]); // useEffect will initialize.
   const [flippedCardIds, setFlippedCardIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [nStartTime, setStartTime] = useState(0);
+  const [nTotalTime, setTotalTime] = useState(0);
+  const [firstMoveTaken, setFirstMoveTaken] = useState(false);
 
   // Function to save the values in local storage
   function saveToLocalStorage(key, value) {
@@ -32,6 +35,7 @@ export default function App() {
 
   function createLayout() {
     setNTries(0);
+    setFirstMoveTaken(false);
     // Create an array to hold the card values
     const cardsArray = [];
     const nCards = nRows * nColumns;
@@ -86,6 +90,11 @@ export default function App() {
   }, [gameOver]);
 
   function flipCard(id) {
+    if (!firstMoveTaken) {
+      setFirstMoveTaken(true);
+      const d = new Date();
+      setStartTime(d.getTime());
+    }
     if (flippedCardIds.length === 2) {
       setNTries((nTries) => nTries + 1);
       // user can't flip any more cards. check for match, turn cards over or remove.
@@ -102,8 +111,7 @@ export default function App() {
       });
       setCards(newArr);
       setFlippedCardIds([]);
-      // Check for game over
-      if (!cards.find((card) => card.isVisible)) setGameOver(true);
+      checkForGameOver();
       return;
     }
     // Don't let the user flip a removed card.
@@ -119,6 +127,16 @@ export default function App() {
     });
     setCards(newArr);
     setFlippedCardIds((oldArray) => [...oldArray, id]);
+
+  }
+
+  function checkForGameOver() {
+    // Check for game over
+    if (!cards.find((card) => card.isVisible)) {
+      const d = new Date();
+      setTotalTime(Math.floor((d.getTime() - nStartTime)/1000));
+      setGameOver(true);
+    }
   }
 
   const cardDivs = cards.map((card) => {
@@ -152,6 +170,9 @@ export default function App() {
     const modal = document.querySelector('[data-id="modal"]');
     modal.classList.add("hidden");
     setCards(createLayout());
+    setFirstMoveTaken(false);
+    setTotalTime(0);
+    setStartTime(0);
     setGameOver(false);
   }
 
@@ -181,7 +202,7 @@ export default function App() {
         {cardDivs}
       </div>
       {gameOver && <Confetti />}
-      <Modal nTries={nTries} restart={restartGame} />
+      <Modal nTries={nTries} restart={restartGame} nTotalTime={nTotalTime} />
     </main>
   );
 }

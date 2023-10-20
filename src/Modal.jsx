@@ -18,4 +18,5 @@ export default function Modal(props) {
 Modal.propTypes = {
   nTries: PropTypes.number.isRequired,
   restart: PropTypes.func.isRequired,
+  nTotalTime: PropTypes.number.isRequired,
 };

@@ -127,14 +127,13 @@ export default function App() {
     });
     setCards(newArr);
     setFlippedCardIds((oldArray) => [...oldArray, id]);
-
   }
 
   function checkForGameOver() {
     // Check for game over
     if (!cards.find((card) => card.isVisible)) {
       const d = new Date();
-      setTotalTime(Math.floor((d.getTime() - nStartTime)/1000));
+      setTotalTime(Math.floor((d.getTime() - nStartTime) / 1000));
       setGameOver(true);
     }
   }

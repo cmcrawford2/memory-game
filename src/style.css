@@ -102,3 +102,27 @@ h3 {
   border-radius: 20px;
   border: 3px solid lightgray;
 }
+
+.multiplayer {
+  width: 50%;
+  text-align: center;
+}
+
+.playerstatus, .score {
+  padding: 10px;
+}
+.player0 {
+  background-color: lightblue;
+}
+
+.player1 {
+  background-color: #00afdf;
+}
+
+#player1Score {
+  float: inline-start;
+}
+
+#player2Score {
+  float: inline-end;
+}

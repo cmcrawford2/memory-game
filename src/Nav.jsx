@@ -10,6 +10,10 @@ export default function Nav(props) {
     props.onSetNumRows(Number(event.target.value));
   }
 
+  function handleGameTypeChange(event) {
+    props.onGameTypeChange(Number(event.target.value));
+  }
+
   return (
     <div className="input">
       <div className="memory">
@@ -44,6 +48,15 @@ export default function Nav(props) {
           <option value={8}>8 Rows</option>
           <option value={9}>9 Rows</option>
         </select>
+        <label htmlFor="gameType">&nbsp;&nbsp;Game Type:&nbsp;</label>
+        <select
+        id="gameType"
+        value={props.gameType}
+        onChange={handleGameTypeChange}
+        >
+          <option value={0}>Solo</option>
+          <option value={1}>2 Player (1v1)</option>
+        </select>
       </div>
       <button className="start-over" onClick={props.startOver}>
         <h2>start over</h2>
@@ -55,7 +68,9 @@ export default function Nav(props) {
 Nav.propTypes = {
   numColumns: PropTypes.number.isRequired,
   numRows: PropTypes.number.isRequired,
+  gameType: PropTypes.number.isRequired,
   onSetNumRows: PropTypes.func.isRequired,
   onSetNumColumns: PropTypes.func.isRequired,
+  onGameTypeChange: PropTypes.func.isRequired,
   startOver: PropTypes.func.isRequired,
 };

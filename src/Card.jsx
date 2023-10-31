@@ -13,7 +13,7 @@ export default function Card(props) {
           : "white",
       }}
     >
-      {props.isFlipped && <img src={props.imageUrl} alt={props.value} />}
+      <img src={props.imageUrl} alt={props.value} style={{display: props.isFlipped ? 'block' : 'none'}} />
     </div>
   );
 }

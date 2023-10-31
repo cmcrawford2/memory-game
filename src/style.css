@@ -44,7 +44,6 @@ h3 {
   /* grid-template-rows: repeat(9, 1fr); 9 equal-height rows */
   gap: 10px;
   max-width: 1190px;
-  margin-left: 20px;
 }
 
 .card {
@@ -104,25 +103,31 @@ h3 {
 }
 
 .multiplayer {
-  width: 50%;
+  display: flex;
+  width: fit-content;
+  margin-bottom: 20px;
+  border-radius: 999px;
+  padding: 1em 2em;
+  background-color: #eee;
+  justify-content: center;
+  gap: 1em;
   text-align: center;
 }
 
-.playerstatus, .score {
+#player-status {
+  min-width: 180px;
   padding: 10px;
 }
-.player0 {
-  background-color: lightblue;
+
+.player-score {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: lightgray;
+  font-weight: bold;
+  color: white;
 }
 
-.player1 {
+.player-active {
   background-color: #00afdf;
-}
-
-#player1Score {
-  float: inline-start;
-}
-
-#player2Score {
-  float: inline-end;
+  color: white;
 }

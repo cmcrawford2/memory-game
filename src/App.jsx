@@ -52,25 +52,26 @@ export default function App() {
     switch(nGameType) {
       case SOLO: // solo
         document.querySelector(".multiplayer").classList.add("hidden");
-        document.querySelector("#player0Status").classList.add("hidden");
-        document.querySelector("#player1Status").classList.add("hidden");
+        document.querySelector("#player-status").classList.add("hidden");
         break;
       case ONE_V_ONE: // 1v1
         document.querySelector(".multiplayer").classList.remove("hidden");
+        document.querySelector("#player-status").classList.remove("hidden");
         changePlayer(PLAYER_1);
         break;
     }
   }
 
   function changePlayer(newPlayer = (currentPlayer + 1) % 2) {
+    document.querySelector("#player-status").textContent = `Player ${newPlayer + 1}, it is your turn`
     switch(newPlayer) {
       case PLAYER_1:
-        document.querySelector("#player1Status").classList.add("hidden");
-        document.querySelector("#player0Status").classList.remove("hidden");
+        document.querySelector("#player1-score").classList.add("player-active");
+        document.querySelector("#player2-score").classList.remove("player-active");
         break;
       case PLAYER_2: 
-        document.querySelector("#player0Status").classList.add("hidden");
-        document.querySelector("#player1Status").classList.remove("hidden");
+        document.querySelector("#player1-score").classList.remove("player-active");
+        document.querySelector("#player2-score").classList.add("player-active");
         break;
     }
     setCurrentPlayer(newPlayer);
